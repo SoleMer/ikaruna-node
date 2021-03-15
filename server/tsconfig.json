@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
+      "sourceMap": true,
+      "outDir": "./dist",
+      "moduleResolution": "node",
+      "noFallthroughCasesInSwitch": true,
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "removeComments": true,
+      "noImplicitAny": true,
+      "strictNullChecks": true,
+      "strictFunctionTypes": true,
+      "noImplicitThis": true,
+      "noUnusedParameters": true,
+      "noImplicitReturns": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "resolveJsonModule": true,
+      "baseUrl": ".",
+      "skipLibCheck": true
+    },
+    "exclude": [
+      "node_modules",
+      "@types/react-native",
+      "@types/testing-library__cypress"
+    ],
+    "include": ["./src/**/*.ts"]
+  }
