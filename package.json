@@ -14,8 +14,7 @@
   ],
   "scripts": {
     "start": "ts-node-dev --respawn src/index.ts",
-    "heroku-prebuild": "cd packages/server",
-    "heroku-postbuild": "cd packages/server && yarn build"
+    "heroku-postbuild": "npm build"
   },
   "engines": {
     "node": "12.x"
