@@ -120,19 +120,3 @@ import {
     as: "Question",
   });
   
-  User.belongsToMany(Therapy, {
-    through: User_Therapy, 
-    foreignKey: "therapist_id",
-  });
-  User.belongsToMany(Shift, {
-    through: User_Shift,
-    foreignKey: "Patient_id",
-  });
-  User.belongsToMany(Question, {
-    through: User_Question, 
-    foreignKey: "user_id",
-  });
-  User.belongsToMany(Notification, {
-    through: User_Notification, 
-    foreignKey: "user_id",
-  });
