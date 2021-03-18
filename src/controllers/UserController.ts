@@ -1,5 +1,5 @@
 import e, { Request, Response } from "express";
-import {  controller, use } from "./decorators";
+import { controller, use } from "./decorators";
 import "../services/passport";
 import { User } from "../models/User";
 import { requireLogin } from "../middleware/requireLogin";
@@ -11,7 +11,6 @@ import uniqid from "uniqid";
 import { postResponseMessages } from "./responseMessages/post";
 import { putResponseMessages } from "./responseMessages/put";
 import { delResponseMessages } from "./responseMessages/delete";
-
 
 @controller("/api/user")
 class UserController {
@@ -32,7 +31,7 @@ class UserController {
             username,
             email,
             phone,
-            admin
+            admin,
           },
         });
       } else {
@@ -46,8 +45,7 @@ class UserController {
   @get("")
   @use(requireLogin)
   @use(requireAdmin)
-  async getAll(req: Request, res: Response) {
-
+  async getAll(_req: Request, res: Response) {
     try {
       const users = await User.findAll();
       /*var response: User[];
@@ -57,7 +55,7 @@ class UserController {
             response.push(user);
               
         } else {*/
-        
+
       return res.status(201).json({ users });
     } catch (error) {
       return res.status(501).json({ message: "Internal server error" });
@@ -76,12 +74,18 @@ class UserController {
         await user.save({
           id: id,
           username: user.username,
-          email : user.email,
-          phone : user.phone,
-          admin : 0,
-          password : user.password,
+          email: user.email,
+          phone: user.phone,
+          admin: 0,
+          password: user.password,
         });
-        return res.status(204).json({ success: { message: postResponseMessages.user_created_successfully } });
+        return res
+          .status(204)
+          .json({
+            success: {
+              message: postResponseMessages.user_created_successfully,
+            },
+          });
       } catch (error) {
         return res
           .status(501)
@@ -91,7 +95,12 @@ class UserController {
 
     return res
       .status(501)
-      .json({ error: { message: "Ya existe un usuario para el email enviado. Iniciar sesión." } });
+      .json({
+        error: {
+          message:
+            "Ya existe un usuario para el email enviado. Iniciar sesión.",
+        },
+      });
   }
 
   @put("/:id")
@@ -101,22 +110,24 @@ class UserController {
     const { new_user } = req.body;
     const id = req.params.id;
     const user = await User.findOne({ where: { id } });
-    var email: string ="";
+    var email: string = "";
     var phone: string = "";
 
-    if(new_user.email !="") email = new_user.email;
-    else if(user instanceof User) email = user.email;
+    if (new_user.email != "") email = new_user.email;
+    else if (user instanceof User) email = user.email;
 
-    if(new_user.phone != "") phone = new_user.phone;
-    else if(user instanceof User) phone = user.phone;
+    if (new_user.phone != "") phone = new_user.phone;
+    else if (user instanceof User) phone = user.phone;
 
     if (user instanceof User) {
       try {
         await user.update({
-          email : email,
-          phone: phone
+          email: email,
+          phone: phone,
         });
-        return res.status(204).json({ success: { message: putResponseMessages.updated_user } });
+        return res
+          .status(204)
+          .json({ success: { message: putResponseMessages.updated_user } });
       } catch (error) {
         return res
           .status(501)
@@ -135,20 +146,19 @@ class UserController {
   async deleteUser(req: Request, res: Response) {
     const id = req.params.id;
 
-      try {
-        await User.destroy({
-          where: {id : id}
-        })
-        return res.status(204).json({ success: { message: delResponseMessages.user_deleted_successfully } });
-      } catch (error) {
-        return res
-          .status(501)
-          .json({ error: { message: delResponseMessages.non_deleted } });
-      }
+    try {
+      await User.destroy({
+        where: { id: id },
+      });
+      return res
+        .status(204)
+        .json({
+          success: { message: delResponseMessages.user_deleted_successfully },
+        });
+    } catch (error) {
+      return res
+        .status(501)
+        .json({ error: { message: delResponseMessages.non_deleted } });
+    }
   }
-
-  
-
 }
-
-
