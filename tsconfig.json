@@ -20,6 +20,11 @@
       "experimentalDecorators": true,
       "resolveJsonModule": true,
       "baseUrl": ".",
+      "types": [
+        "reflect-metadata",
+        "node",
+        "typescript"
+      ],
     },
     "exclude": [
       "node_modules",
