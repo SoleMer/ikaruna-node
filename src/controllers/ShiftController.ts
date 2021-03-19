@@ -137,10 +137,10 @@ class ShiftController {
 
     if (patient instanceof User && therapy instanceof Therapy) {
       msg =
-        patient.username +
-        " solicita un turno para " +
-        therapy.name +
-        ", con fecha y hora: " +
+      patient.username +
+      " solicita un turno para " +
+      therapy.name +
+      ", con fecha y hora: " +
         shift.date +
         ". Su número de contacto es: " +
         patient.phone +
@@ -149,17 +149,21 @@ class ShiftController {
     const id = uniqid() + uniqid();
     const admins = await User.findAll({ where: { admin: 1 } });
     var notification: any;
-
-    admins.forEach(async (a) => {
-      if (a.phone != "1234") {
-        await notification.save({
-          id: id,
-          subject: subject,
-          text: msg,
-          user_id: a.id,
-        });
-      }
-    });
+    
+    try {
+      admins.forEach(async (a) => {
+        if (a.phone != "1234") {
+          await notification.save({
+            id: id,
+            subject: subject,
+            text: msg,
+            user_id: a.id,
+          });
+        }
+      });  
+    } catch (error) {
+        console.log(error);
+    }
   }
 
   async notifyShiftAccepted(shift: Shift) {
@@ -179,11 +183,15 @@ class ShiftController {
     }
     const id = uniqid() + uniqid();
     var notification: any;
-    await notification.save({
-      id: id,
-      subject: subject,
-      text: msg,
-      user_id: shift.patient_id,
-    });
+    try {
+      await notification.save({
+        id: id,
+        subject: subject,
+        text: msg,
+        user_id: shift.patient_id,
+      });  
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

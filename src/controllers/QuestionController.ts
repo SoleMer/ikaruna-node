@@ -7,7 +7,6 @@ import { requireLogin } from "../middleware/requireLogin";
 import { requireAdmin } from "../middleware/requireAdmin";
 import { postResponseMessages } from "../controllers/responseMessages/post";
 import { get, post } from "./decorators/route";
-import uniqiid from "uniqid";
 import uniqid from "uniqid";
 
 @controller("/api/question")
@@ -67,15 +66,19 @@ class QuestionController {
     const admins = await User.findAll({ where: { admin: 1 } });
     var notification: any;
 
-    admins.forEach(async (a) => {
-      if (a.phone != "1234") {
-        await notification.save({
-          id: id,
-          subject: subject,
-          text: msg,
-          user_id: a.id,
-        });
-      }
-    });
+    try {
+      admins.forEach(async (a) => {
+        if (a.phone != "1234") {
+          await notification.save({
+            id: id,
+            subject: subject,
+            text: msg,
+            user_id: a.id,
+          });
+        }
+      });   
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

@@ -41,16 +41,16 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-//app.options("*", cors();
+app.options("*", cors());
 app.set("trust proxy", 1); // As indicate by Sammy's reponse in https://stackoverflow.com/questions/44039069/express-session-secure-cookies-not-working
 
 app.use(express.json());
 
 if (process.env.TS_NODE_DEV) {
   const pool = new Pool({
-    user: "",
-    password: "",
-    database: "",
+    user: "postgres",
+    password: "27072010",
+    database: "postgres",
   });
 
   app.use(
