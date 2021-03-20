@@ -46,7 +46,7 @@ export class Workshop extends Model {
             },
         },
         {
-            tableName: "therapy",
+            tableName: "workshop",
             sequelize,
         }
     );

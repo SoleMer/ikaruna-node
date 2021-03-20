@@ -8,7 +8,7 @@ let sequelize: Sequelize = new Sequelize({
   username: DB_USER,
   password: DB_PASSWORD,
   dialect: "postgres",
-  logging: false,
+  logging: true,
 });
 
 if (process.env.DATABASE_URL) {

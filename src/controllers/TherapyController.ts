@@ -87,7 +87,7 @@ class TherapyController {
     const therapy = await Therapy.findOne({ where: { id: id } });
     var trp_name: string = "";
     var desc: string = "";
-    var ther: number = 0;
+    var ther: string = "";
 
     if (new_therapy.name != "") trp_name = new_therapy.name;
     else if (therapy instanceof Therapy) trp_name = therapy.name;

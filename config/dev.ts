@@ -6,7 +6,7 @@ export const devKeys = {
   };
   
   export const devDbCredentials = {
-    DB_NAME: "ikaruna",
+    DB_NAME: "postgres",
     DB_USER: "postgres",
-    DB_PASSWORD: "",
+    DB_PASSWORD: "27072010",
   };

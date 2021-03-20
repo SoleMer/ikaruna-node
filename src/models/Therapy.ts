@@ -18,7 +18,7 @@ export class Therapy extends Model {
   public id!: string;
   public name!: string;
   public description!: string;
-  public therapist_id!: number;
+  public therapist_id!: string;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -50,7 +50,7 @@ Therapy.init(
       allowNull: false,
     },
     therapist_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(100),
       allowNull: false,
       defaultValue: 0,
     },

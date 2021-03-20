@@ -16,9 +16,9 @@ import {
 
   export class Shift extends Model {
     public id!: string;
-    public therapy_id!: number;
+    public therapy_id!: string;
     public date!: string;
-    public patient_id!: number;
+    public patient_id!: string;
     public patient_name!: string;
     public status: number;
 
@@ -47,11 +47,11 @@ Shift.init(
             unique: true,
         },
         therapy_id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING(100),
             allowNull: false,
         },
         patient_id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING(100),
             allowNull: true,
             defaultValue: 0,
         },

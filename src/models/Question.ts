@@ -16,7 +16,7 @@ import {
 export class Question extends Model {
     public id!: string;
     public text!: string;
-    public user_id!: number;
+    public user_id!: string;
 
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
@@ -39,7 +39,7 @@ export class Question extends Model {
                 allowNull: false,
             },
             user_id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.STRING(100),
                 allowNull: false,
                 defaultValue: 0,
             },
